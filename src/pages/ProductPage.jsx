@@ -6,9 +6,8 @@ import QuantityControl from '../components/QuantityControl';
 import FulfillmentModule from '../components/FulfillmentModule';
 import { useCart } from '../lib/cart';
 import { supabase } from '../lib/supabase';
-import { Product } from '../types';
 
-const FALLBACK_PRODUCTS: Record<string, Product> = {
+const FALLBACK_PRODUCTS = {
   'jbl-go-speaker': {
     id: 'jbl-1',
     name: 'JBL Go Portable Speaker',
@@ -74,7 +73,7 @@ const FALLBACK_PRODUCTS: Record<string, Product> = {
 export default function ProductPage() {
   const { slug } = useParams();
   const { addItem } = useCart();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);

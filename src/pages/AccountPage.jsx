@@ -13,7 +13,7 @@ export default function AccountPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'orders';
 
-  const setTab = (tab: string) => {
+  const setTab = (tab) => {
     setSearchParams({ tab });
   };
 

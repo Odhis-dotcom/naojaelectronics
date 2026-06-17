@@ -1,20 +1,9 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Product, CartItem } from '../types';
+import { createContext, useContext, useState, useEffect } from 'react';
 
-interface CartContextType {
-  items: CartItem[];
-  addItem: (product: Product, quantity?: number) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
-  clearCart: () => void;
-  total: number;
-  itemCount: number;
-}
+const CartContext = createContext(undefined);
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => {
+export function CartProvider({ children }) {
+  const [items, setItems] = useState(() => {
     const saved = localStorage.getItem('naoja_cart');
     return saved ? JSON.parse(saved) : [];
   });
@@ -23,7 +12,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('naoja_cart', JSON.stringify(items));
   }, [items]);
 
-  const addItem = (product: Product, quantity = 1) => {
+  const addItem = (product, quantity = 1) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
       if (existing) {
@@ -37,11 +26,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeItem = (productId: string) => {
+  const removeItem = (productId) => {
     setItems((prev) => prev.filter((item) => item.product.id !== productId));
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId, quantity) => {
     if (quantity <= 0) {
       removeItem(productId);
       return;

@@ -2,11 +2,11 @@ const SATURDAY = 6;
 export const FREE_DELIVERY_THRESHOLD = 600;
 const DELIVERY_CUTOFF_HOUR = 16;
 
-function getNow(): Date {
+function getNow() {
   return new Date();
 }
 
-export function isPickupOpen(now: Date = getNow()): boolean {
+export function isPickupOpen(now = getNow()) {
   const d = now.getDay();
   const h = now.getHours() + now.getMinutes() / 60;
 
@@ -16,7 +16,7 @@ export function isPickupOpen(now: Date = getNow()): boolean {
   return false;
 }
 
-export function isDeliveryOpen(now: Date = getNow()): boolean {
+export function isDeliveryOpen(now = getNow()) {
   const d = now.getDay();
   const h = now.getHours() + now.getMinutes() / 60;
 
@@ -24,7 +24,7 @@ export function isDeliveryOpen(now: Date = getNow()): boolean {
   return h >= 8 && h < 16;
 }
 
-export function formatDeliveryMessage(now: Date = getNow()): string {
+export function formatDeliveryMessage(now = getNow()) {
   const d = now.getDay();
   const hour = now.getHours();
 
@@ -43,7 +43,7 @@ export function formatDeliveryMessage(now: Date = getNow()): string {
   return `Orders after 4:00pm are delivered the next day.`;
 }
 
-export function formatPickupMessage(now: Date = getNow()): string {
+export function formatPickupMessage(now = getNow()) {
   const d = now.getDay();
 
   if (d === SATURDAY) {
@@ -57,11 +57,11 @@ export function formatPickupMessage(now: Date = getNow()): string {
   return `We're currently closed. Your order will be ready 1-2 hours after we open.`;
 }
 
-export function getDeliveryFee(subtotal: number): number {
+export function getDeliveryFee(subtotal) {
   return subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 150;
 }
 
-export function isFreeDelivery(subtotal: number): boolean {
+export function isFreeDelivery(subtotal) {
   return subtotal >= FREE_DELIVERY_THRESHOLD;
 }
 

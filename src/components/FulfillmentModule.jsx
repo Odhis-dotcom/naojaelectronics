@@ -8,17 +8,11 @@ import {
   FREE_DELIVERY_THRESHOLD,
 } from '../lib/fulfillment';
 
-interface FulfillmentModuleProps {
-  subtotal: number;
-  showPanels?: boolean;
-  compact?: boolean;
-}
-
 export default function FulfillmentModule({
   subtotal,
   showPanels = true,
-}: FulfillmentModuleProps) {
-  const [tab, setTab] = useState<'delivery' | 'pickup'>('delivery');
+}) {
+  const [tab, setTab] = useState('delivery');
   const [deliveryMsg, setDeliveryMsg] = useState('');
   const [pickupMsg, setPickupMsg] = useState('');
 

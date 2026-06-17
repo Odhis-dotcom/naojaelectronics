@@ -1,16 +1,9 @@
-interface QuantityControlProps {
-  quantity: number;
-  onIncrease: () => void;
-  onDecrease: () => void;
-  size?: 'sm' | 'md';
-}
-
 export default function QuantityControl({
   quantity,
   onIncrease,
   onDecrease,
   size = 'md',
-}: QuantityControlProps) {
+}) {
   const btnSize = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10';
   const textSize = size === 'sm' ? 'text-sm' : 'text-base';
 

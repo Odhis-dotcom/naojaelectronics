@@ -4,9 +4,8 @@ import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import CategoryCard from '../components/CategoryCard';
 import { supabase } from '../lib/supabase';
-import { Product, Category } from '../types';
 
-const DEFAULT_CATEGORIES: Category[] = [
+const DEFAULT_CATEGORIES = [
   { id: '1', name: 'Phones', slug: 'phones', description: 'Smartphones & accessories', image_url: '', product_count: 45 },
   { id: '2', name: 'Laptops & Computers', slug: 'laptops-computers', description: 'Work & gaming', image_url: '', product_count: 32 },
   { id: '3', name: 'TVs & Displays', slug: 'tvs-displays', description: '4K, smart TVs', image_url: '', product_count: 28 },
@@ -18,7 +17,7 @@ const DEFAULT_CATEGORIES: Category[] = [
   { id: '9', name: 'Accessories', slug: 'accessories', description: 'Chargers, cables', image_url: '', product_count: 124 },
 ];
 
-const DEFAULT_PRODUCTS: Product[] = [
+const DEFAULT_PRODUCTS = [
   {
     id: '1',
     name: 'Oraimo FreePods Pro',
@@ -82,8 +81,8 @@ const DEFAULT_PRODUCTS: Product[] = [
 ];
 
 export default function HomePage() {
-  const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
-  const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
+  const [products, setProducts] = useState(DEFAULT_PRODUCTS);
 
   useEffect(() => {
     async function fetchData() {

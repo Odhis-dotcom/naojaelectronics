@@ -3,9 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import { supabase } from '../lib/supabase';
-import { Product, Category } from '../types';
 
-const CATEGORY_DATA: Record<string, Product[]> = {
+const CATEGORY_DATA = {
   phones: [
     { id: 'p1', name: 'Samsung Galaxy A14', slug: 'samsung-galaxy-a14', description: '128GB Dual SIM', price: 24999, category_id: '1', category_name: 'Phones', brand: 'Samsung', image_url: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=400', in_stock: true, highlights: [], specifications: {}, created_at: '' },
     { id: 'p2', name: 'iPhone 13', slug: 'iphone-13', description: '128GB', price: 85000, category_id: '1', category_name: 'Phones', brand: 'Apple', image_url: 'https://images.pexels.com/photos/5754090/pexels-photo-5754090.jpeg?auto=compress&cs=tinysrgb&w=400', in_stock: true, highlights: [], specifications: {}, created_at: '' },
@@ -43,7 +42,7 @@ const CATEGORY_DATA: Record<string, Product[]> = {
   ],
 };
 
-const CATEGORY_NAMES: Record<string, string> = {
+const CATEGORY_NAMES = {
   phones: 'Phones',
   'laptops-computers': 'Laptops & Computers',
   'tvs-displays': 'TVs & Displays',
@@ -57,11 +56,11 @@ const CATEGORY_NAMES: Record<string, string> = {
 
 export default function CategoryPage() {
   const { slug } = useParams();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [category, setCategory] = useState<Category | null>(null);
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    brand: [] as string[],
+    brand: [],
     priceRange: '',
     inStock: false,
   });

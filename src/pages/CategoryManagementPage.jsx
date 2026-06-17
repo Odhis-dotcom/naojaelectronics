@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Upload, Trash2, Edit, Save, X, Image as ImageIcon } from 'lucide-react';
 import Layout from '../components/Layout';
 import { supabase } from '../lib/supabase';
-import { Category } from '../types';
 
 export default function CategoryManagementPage() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({ name: '', description: '', image_url: '' });
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchCategories();
@@ -35,7 +34,7 @@ export default function CategoryManagementPage() {
     }
   }
 
-  function startEditing(category: Category) {
+  function startEditing(category) {
     setEditingId(category.id);
     setEditForm({
       name: category.name,
@@ -49,7 +48,7 @@ export default function CategoryManagementPage() {
     setEditForm({ name: '', description: '', image_url: '' });
   }
 
-  async function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+  async function handleImageUpload(event) {
     const file = event.target.files?.[0];
     if (!file) return;
 

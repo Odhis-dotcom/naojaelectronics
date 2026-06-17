@@ -3,9 +3,8 @@ import { ShoppingCart, User, Heart, Search, Menu, X, ChevronDown, Shield } from 
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../lib/cart';
 import { supabase } from '../lib/supabase';
-import { Category } from '../types';
 
-const DEFAULT_CATEGORIES: Category[] = [
+const DEFAULT_CATEGORIES = [
   { id: '1', name: 'Phones', slug: 'phones', description: 'Smartphones & accessories', image_url: '', product_count: 45 },
   { id: '2', name: 'Laptops & Computers', slug: 'laptops-computers', description: 'Work & gaming', image_url: '', product_count: 32 },
   { id: '3', name: 'TVs & Displays', slug: 'tvs-displays', description: '4K, smart TVs', image_url: '', product_count: 28 },
@@ -23,8 +22,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoriesMenuOpen, setCategoriesMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -41,8 +40,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setCategoriesMenuOpen(false);
       }
     }

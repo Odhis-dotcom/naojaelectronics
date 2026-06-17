@@ -18,13 +18,13 @@ export default function CheckoutPage() {
     phone: '',
     area: '',
     directions: '',
-    fulfillment: 'delivery' as 'delivery' | 'pickup',
+    fulfillment: 'delivery',
   });
   const [mpesaRef, setMpesaRef] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [copiedTill, setCopiedTill] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
 
   const deliveryFee = getDeliveryFee(total);
   const grandTotal = total + deliveryFee;
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
   }
 
   function validateStep1() {
-    const e: Record<string, string> = {};
+    const e = {};
     if (!formData.fullName.trim()) e.fullName = 'Name is required';
     if (!formData.phone.trim()) e.phone = 'Phone number is required';
     if (formData.fulfillment === 'delivery' && !formData.area.trim()) e.area = 'Area is required for delivery';
@@ -46,7 +46,7 @@ export default function CheckoutPage() {
   }
 
   function validateStep2() {
-    const e: Record<string, string> = {};
+    const e = {};
     if (!mpesaRef.trim()) e.mpesaRef = 'M-Pesa transaction code is required';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -293,16 +293,16 @@ export default function CheckoutPage() {
                       { step: '1', text: 'Open M-Pesa on your phone' },
                       { step: '2', text: 'Select Lipa na M-Pesa' },
                       { step: '3', text: 'Select Buy Goods and Services' },
-                      { step: '4', text: <>Enter Till Number: <strong className="font-mono text-gray-900 text-sm">{TILL_NUMBER}</strong></> },
-                      { step: '5', text: <>Enter amount: <strong className="text-gray-900">KSh {grandTotal.toLocaleString()}</strong></> },
+                      { step: '4', text: <span>Enter Till Number: <strong className="font-mono text-gray-900 text-sm">{TILL_NUMBER}</strong></span> },
+                      { step: '5', text: <span>Enter amount: <strong className="text-gray-900">KSh {grandTotal.toLocaleString()}</strong></span> },
                       { step: '6', text: 'Enter your M-Pesa PIN and confirm' },
-                      { step: '7', text: <>Copy the <strong className="text-gray-900">transaction code</strong> from the SMS sent to your phone and paste it below</> },
-                    ].map(({ step: s, text }) => (
-                      <li key={s} className="flex items-start gap-3">
+                      { step: '7', text: <span>Copy the <strong className="text-gray-900">transaction code</strong> from the SMS sent to your phone and paste it below</span> },
+                    ].map((item) => (
+                      <li key={item.step} className="flex items-start gap-3">
                         <span className="w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center shrink-0">
-                          {s}
+                          {item.step}
                         </span>
-                        <span className="text-sm text-gray-600 pt-0.5">{text}</span>
+                        <span className="text-sm text-gray-600 pt-0.5">{item.text}</span>
                       </li>
                     ))}
                   </ol>

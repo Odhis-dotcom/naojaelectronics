@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../types';
 
-interface ProductCardProps {
-  product: Product;
-}
-
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }) {
   return (
     <Link
       to={`/product/${product.slug}`}

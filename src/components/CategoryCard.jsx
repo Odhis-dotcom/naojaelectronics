@@ -1,12 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Category } from '../types';
 
-interface CategoryCardProps {
-  category: Category;
-}
-
-export default function CategoryCard({ category }: CategoryCardProps) {
+export default function CategoryCard({ category }) {
   return (
     <Link
       to={`/category/${category.slug}`}
